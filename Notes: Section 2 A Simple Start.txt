@@ -1,0 +1,128 @@
+What did our Hello World program tell us?
+
+Let's take a look again:
+
+1 package main
+2 
+3 import "fmt"
+4 
+5 func main() {
+6   fmt.Println("Hi there!")
+7 }
+8
+
+Stephen presents 5 basic questions:
+1. How do we run the code in our project?
+2. What does 'package main' mean?
+3. What does 'import "fmt"' mean?
+4. What's that 'func' thing? (I can deduce this is a function)
+5. How is the main.go file organized?
+
+1. How do we run the code in our project?
+We can use the 'go' command, 'go' has a cli tool.
+So how do we run main.go? 
+go run main.go
+
+The Go CLI has a few commands
+go build    - compiles a bunch of go source code files.
+go run      - compiles and executes one or two files.
+go fmt      - formats all the code in each file in in cur dir.
+go install  - compiles and "installs" a package.
+go get      - downloads the raw source code of someone else's package.
+go test     - runs any tests associated with the curent project.
+
+What's the difference between build and run? Run will execute it, build will build the code into a file (like a .exe)
+
+2. What does 'package main' mean?
+A package is a collection of common source code files.
+Package == Project == Workplace
+
+                Package Main
+.----------------------------------------------.
+| main.go                support.go            |              
+| .-------------------.  .-------------------. |
+| | package main      |  | package main      | |
+| | import "fmt"      |  |                   | |
+| | func main() {     |  | func support() {  | | 
+| |   fmt.Println("Hi |  |   fmt.Println("I  | |
+| |   there!")"       |  |   help!")         | |
+| | }                 |  | }                 | |
+| '-------------------'  '-------------------' |
+|                                              |
+| helper.go                                    |
+| .-------------------.                        |
+| | package main      |                        |
+| |                   |                        |
+| | func help() {     |                        |
+| |   fmt.Println("I  |                        |
+| |   help too")      |                        |
+| | }                 |                        |
+| '-------------------'                        |
+'----------------------------------------------'
+
+What's all going on here? If all three files, main.go, support.go, and helper.go all belong to "Package Main" then all must have "package main" at the top.
+But what is it called main? Why is not called 'hello-world.go'?
+In go there are two types of packages: executable and reusable.
+
+Executable: An executable type package is one that when compiled spits out an
+            executable file. Such as when we ran go build main.go we got a file
+            named "main".
+Reusable:   Code used as "helpers." They're good places to put reusable logic.
+
+So how do we know when we're making one or the other? It's the name of the package. Specifically "main" is used to designate an executable file. Any other name, if we had called it "package blahblah" and we ran go build there would be no output of main.
+
+To recap: Executable package => package main (must have a func called 'main')
+          Reusable package => package calculator, package sniffer
+          We called our "Hello world" package main and then had a func main()
+
+3. What does 'import "fmt"' mean?
+It ties in with packages - we can import packages. Therefore, on line 3 when we write 'import "fmt"' then we want everything within the package "fmt" which is a standard library package that is included with the go language. The "fmt" library allows us to print to the terminal, it stands for format. We can think of the standard library of go sort of like this:
+
+                        math
+    debug
+                                encoding
+                main
+        fmt               crypto
+                  io
+
+Our main cannot touch any of those unless we import. We are also not limited to the standard library. We can import other packages that are authored and published by other engineers. We can view the standard lib docs by going to:
+
+https://golang.org/pkg
+
+Get used to reading the documentation. Get used to reading the documentation.
+You will visit them a lot. You will need to read them a lot. It is super helpful.
+
+4. What's that 'func' thing?
+
+Functions in go function as other functions, and func = function. We declare a function with the func keyword, the name, then the argument list (), open up the curly brackets {}, and then we have the function body within the curlies.
+
+5. How is the main.go file organized?
+
+We will always follow the same flow in go.
+.-----------------------------------------------.
+|                     |                         |
+| package main        | package declaration     |
+|_____________________|_________________________|
+|                     |                         |
+| import "fmt"        | import packages we need |
+|_____________________|_________________________|
+|                     |                         |
+| func main() {       | Declare functions,      |
+|   fmt.Println("Hi there!")                    |
+| }                   | tell Go to do things.   |
+'-----------------------------------------------'
+
+Like creating a node server, react files, etc. 
+
+Recap Quiz
+1. What is the purpose of a package in Go?
+To group together code with a similar purpose.
+
+2. What is the special name we use for a package to tell Go that we want it to be turned into a file that can be executed?
+main
+
+3. The one requirement of packages named "main" is that we...
+Define a function named "main", which is ran automatically when the program runs.
+
+4. Why do we use "import" statements?
+To give our package access to code written in another package.

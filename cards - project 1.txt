@@ -1,0 +1,174 @@
+For the first project we'll create a deck of cards.
+
+        CARDS
+ _____________________
+| .----------------. |
+| | newDeck        | | => Create a list of playing cards, essneitally an array 
+| '----------------' |    of strings
+| .----------------. |
+| | print          | | => Log out the contents of a deck of cards
+| '----------------' |
+| .----------------. |
+| | shuffle        | | => Shuffles all the cards in a deck
+| '----------------' |
+| .----------------. |
+| | deal           | | => Create a 'hand' of cards
+| '----------------' |
+| .----------------. |
+| | saveToFile     | | => Save a list of cards to a file on the local machine
+| '----------------' |    (write to our HDD)
+| .----------------. |
+| | newDeckFromFile| | => Load a list of cards from the local machine
+| '----------------' |    (read from our HDD)
+'--------------------'
+
+package main
+
+import "fmt"
+
+func main() {
+	var card string = "Ace of spades"
+	fmt.Println(card)
+}
+
+Let's check out:
+
+var card string = "Ace of Spades"
+var = we're creating (declaring) a new variable
+card = the name of the variable in this case 'card'
+string = Only a "string" will ever be assigned to this variable
+= (you know this one)
+"Ace of Spades" = Assigns the value, in this case a STRING
+
+Let's look at that string decaration type:
+
+Dyanmic Types | Static Types
+--------------|--------------
+Javascript    | C++
+Ruby          | Java
+Python        | Go
+
+Go is a statically typed language. A dynamically typed language is one where we do not really need to assign a value to any given variable. We could have a variable named number such as:
+
+.-----------------------------------------------------------.
+|Javascript                       | Python                  |
+|- -------------------------------|-------------------------|
+| let number = 123                | number = 123            |
+| number = "abcd"                 | number = "abcd"         |
+| console.log(number) => "abcd"   | print(number) => "abcd" |
+'-----------------------------------------------------------' 
+We can reassign the value of the variable, it doesn't really matter. However, in a statically typed language we have to assign the datatype to the variable. So what are you the basic Go datatypes?
+.----------------------------------------.
+|         THE BASIC GO DATATYPES         | 
+| Type    | Example                      |
+| --------|------------------------------|
+| bool    | true, false                  |
+|         |                              |
+| string  | "Hi!", "how's it going?"     |
+|         |                              |
+| int     | 0, -1000, 99999              |
+|         |                              |
+| float64 | 10.000001, 0.00009, -100.003 |
+'----------------------------------------'
+
+bool = boolean value (true or false)
+string = a string of chars
+int = an intenger
+float64 = a number w/ a decimal after it
+These are not the ONLY datatypes. These are the BASIC or FUNDAMENTAL types available in Go.
+
+But Go makes this sort of easier for us. We don't really /need/ to have the declaration type of string in var card string = "Ace of Spades"
+We can also go: card := "Ace of Spades"
+
+var card string = "Ace of Spades"
+is the same as
+card := "Ace of Spades"
+Neat. 
+
+How does it do that?!
+Well, really it uses the `:=` which is an operator that tells the compiler to INFER the datatype. However it only does this to a degree. A very common error can only be used when DEFINING A NEW VARIABLE. When REASSIGNING a value we don't need to :=
+
+So if we want the card to be "Five of Diamonds" we can just...
+card = "Five of Diamonds"
+Without the colon. If we had tried to use `:=` we would get a NoNewVar error. To recap: We can declare a NEW variable with `:=` and the compiler will INFER the datatype. We can REASSIGN the VALUE of a variable with an `=`.
+
+Something to consider: Is the following code valid?
+
+1| package main
+2|
+3| import "fmt"
+4|
+5| deckSize := 20
+6|
+7| func main() {
+8|   fmt.Println(deckSize)
+9| }
+
+NO. It is not. Variables can be intialized outside of a function, but cannot be assigned a value. How would we make it valid?
+
+1| package main
+2|
+3| import "fmt"
+4|
+5| func main() {
+6|   var deckSize int
+7|   deckSize = 52
+8|   fmt.Println(deckSize)
+9| }
+
+ 1| package main
+ 2|
+ 3| import "fmt"
+ 4|
+ 5| var deckSize int
+ 6|
+ 7| func main() {
+ 8|   deckSize = 50        
+ 9|   fmt.Println(deckSize)
+10| }
+
+Both of these would valid.
+
+16. FUNCTIONS AND RETURN TYPES
+package main
+
+import "fmt"
+
+func main() {
+	// var card string = "Ace of spades"
+	card := newCard()
+
+	fmt.Println(card)
+}
+
+func newCard() {
+	return "Five of Diamonds"
+}
+Why did this result in an error? We need to return a type. To fix this error we would then need to write
+
+func newCard() string {
+        return "Five of Diamonds"
+}
+
+The first function Go interpreted as we wanted to return nothing at all. We have to be explicit with the type of datatype we want to return from a function. So writing `func newCard() string` is that whenever we invoke newCard() we need to return a value of type string. If we were to of course declare the function with func newCard() int { return "Five of Diamonds"} we would get an error, because we're returning a STRING when we told the function to expect an INT return. 
+
+HOT TIP: The error messages in VS Code are very helpful. READ THEM.
+
+17. SLICES AND FOR LOOPS
+
+Last thing to check out before we start our project to create a deck of cards. We need some sort of data structure to hold our cards, and we'll use an array.
+
+Go has two basic data types of lists: ARRAY and SLICE
+An array is a fixed length list of things it is a very basic, primitize data structure (a fixed list). When we declare an array we'd have to declare its length.
+A slice is an array that can grow or shrink (it's a dynamic list). It is an array that can grow or shrink. 
+BOTH arrays and slices MUST have the SAME type.
+["Five of Spades", "Three of Diamonds", "Five of Diamonds"] => VALID
+["Five of Spades", 58945824943902585, "Five of Diamonds"] => INVALID
+
+How should we declare a slice? 
+	cards := []string{"Ace of Diamonds", newCard()}
+would be valid syntax.
+
+How do we add? cards = append(cards, "Six of Spades")
+                              ^ here as the first arg we pass in our slice.
+Append does not modify, it returns a NEW slice that is assigned back to the var of cards.
