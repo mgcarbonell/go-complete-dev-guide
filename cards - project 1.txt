@@ -172,3 +172,18 @@ would be valid syntax.
 How do we add? cards = append(cards, "Six of Spades")
                               ^ here as the first arg we pass in our slice.
 Append does not modify, it returns a NEW slice that is assigned back to the var of cards.
+
+Let's take a look at our loop
+.-----------------------------------.
+|     i      c    := rc            |
+| for index, card := range cards {  |
+|         fmt.Println(card)         |
+| }       ^fpc                      |
+'-----------------------------------'
+i = the index of this element in the array
+c = current card we are iterating over
+rc = The slice of "cards" to loop over. There's an important keyword here: RANGE
+:= we assign the index and value to every element within the slice to index and card
+fpc = Run this one time for each card in the slice
+
+Why are we using := if we said that it's only assigned when a value is declared? But here what we're doing is that each time we iterate, we discard the previous so we reinitialize index and card via the := syntax
