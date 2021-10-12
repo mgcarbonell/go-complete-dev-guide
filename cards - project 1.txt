@@ -187,3 +187,15 @@ rc = The slice of "cards" to loop over. There's an important keyword here: RANGE
 fpc = Run this one time for each card in the slice
 
 Why are we using := if we said that it's only assigned when a value is declared? But here what we're doing is that each time we iterate, we discard the previous so we reinitialize index and card via the := syntax
+
+To recap some things: If we wanted a slice of integers we could simply do:
+
+[]int{} => int array/slice
+We must also use every variable we declare
+Slices cannot have multiple data types. 
+
+18. OO (Object Oriented) Approach vs Go Approach
+Go is NOT an Object Oriented programming language. There are no classes. 
+Traditionally what we would do in OOP is create a Deck class. The Deck class might have an instance with a prop called cards, and then it would have multiple methods such as print, shuffle, saveToFile, to manipulate the list of cards. How does Go differ?
+
+In Go we have the basic types: string, int, float, array/slice, map. We would need to then "extend" the base types and add extra functionality to it. We will define NEW types, like a "deck type" or "type deck []string". We will tell Go that we want to create an array of strings and add a bunch of functions specifically made to work with it. We will then make a 'receiver', and this will become a common pattern we will see. A function with a receiver is like a "method" in a class.
