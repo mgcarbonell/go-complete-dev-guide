@@ -199,3 +199,29 @@ Go is NOT an Object Oriented programming language. There are no classes.
 Traditionally what we would do in OOP is create a Deck class. The Deck class might have an instance with a prop called cards, and then it would have multiple methods such as print, shuffle, saveToFile, to manipulate the list of cards. How does Go differ?
 
 In Go we have the basic types: string, int, float, array/slice, map. We would need to then "extend" the base types and add extra functionality to it. We will define NEW types, like a "deck type" or "type deck []string". We will tell Go that we want to create an array of strings and add a bunch of functions specifically made to work with it. We will then make a 'receiver', and this will become a common pattern we will see. A function with a receiver is like a "method" in a class.
+
+RECEIVER FUNCTIONS AND GO VS OOP
+In ./cards/deck.go we'll see a function that looks like the following:
+
+func (d deck) print() {
+
+}
+
+This is called a receiver function, the (d deck) part means that anything with the type of deck gets the function print. A receiver sets up methods on variables we create. Let's take a closer look:
+
+func (d deck) print() {
+	for i, card := range d {
+		fmt.Println(i, card);
+	}
+}
+d = "the actual copy of the deck we're working with is available in the function as a variable called 'd'"
+deck = Every variable of type 'deck' can call this function on itself
+
+This should look familiar, d is just shorthand. Were we to be more verbose it would look something like:
+func (cards deck) print() {
+	for i, card := range cards {
+		fmt.Println(i, card)
+	}
+}
+
+Another way to think of the first arg in a receiver is to think of it as this or self like from a class in JS or Python.
