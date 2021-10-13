@@ -225,3 +225,14 @@ func (cards deck) print() {
 }
 
 Another way to think of the first arg in a receiver is to think of it as this or self like from a class in JS or Python.
+
+Returning multiple values
+
+When we look at the line of code it seems weird but let's take a look
+
+hand, remainingDeck = deal(cards, 5)
+
+hand, and remainingDeck are going to be the values that deal(cards, 5) returns.
+The first deck gets assinged to hand
+The second deck gets assigned to remainingDeck
+
