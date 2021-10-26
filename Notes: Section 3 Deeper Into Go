@@ -1,0 +1,19 @@
+What is a byte slice?
+
+"Hi there" - string
+gets represented as
+[72 105 32 116 104 101 11 101 33] or as a byte slice in ascii
+
+How do we write our strings to memory? we use type conversion
+We take one type of value and turn it into another type
+[]byte("Hi there!)
+^type we want ^
+              | value we have
+
+We have    a deck
+               |
+           []string
+               |
+             string
+               |
+We want    []byte   
