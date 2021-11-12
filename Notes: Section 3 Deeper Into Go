@@ -8,23 +8,22 @@ How do we write our strings to memory? we use type conversion
 We take one type of value and turn it into another type
 []byte("Hi there!)
 ^type we want ^
-| value we have
+              | value we have
 
-We have a deck
-|
-[]string
-|
-string
-|
-We want []byte
+We have    a deck
+               |
+           []string
+               |
+             string
+               |
+We want    []byte   
 
 From lecture #28:
 
 Stephen calls part of the structure of the function "The function signature." File signatures are pretty common, you just haven't worked much with them because you don't need to use them. But, we can still see them in Javascript.
 
 MyObject.prototype.myFunction(value)
-1 2 3 4
-
+1        2         3          4
 1. The method is installed on an object called MyObject
 2. The method is installed on the prototype of MyObject (thus it is an instance method) as opposed to being a static method (remember Java?)
 3. The name of the method is myFunction``
@@ -33,8 +32,7 @@ MyObject.prototype.myFunction(value)
 Now remember in Java?
 
 public static void main(String[] args)
-1 2 3 4 5
-
+1      2      3    4    5
 1. The public keyword is an access modifier and indicates that this method can be called by any object.
 2. The static keyword indicates that this method is a class method as opposed to being an instance method.
 3. The void keyword indicates that it has no return value.
