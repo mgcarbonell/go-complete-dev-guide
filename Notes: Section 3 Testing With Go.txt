@@ -1,0 +1,8 @@
+Testing with go is not like using RSpec, mocha, jasmine, selenium ,etc..
+
+The Go testing interface is a small set of functions, in practice it ends up with us writing normal Go code to test our code. 
+
+2 important things:
+
+To make a test file we just need to make a file that ends with `_test.go`
+So we might make a thing called deck_test.go and then can run go test in the command line.
