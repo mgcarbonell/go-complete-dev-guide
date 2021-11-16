@@ -38,3 +38,8 @@ public static void main(String[] args)
 3. The void keyword indicates that it has no return value.
 4. The name of the method is main.
 5. The method accepts one parameter of type String Array and it is named args.
+
+When we're returning errors from Go, we usually have 2 approaches:
+log the error and return a call to a function that tries to load the file again
+log the error and entirely quit the program - this might be the better option
+
