@@ -3,13 +3,11 @@ package main
 import (
 	"io/ioutil"
 	"fmt"
+	"os"
 	"strings"
 )
 
 type deck []string
-
-// Create a new type of 'deck'
-// which is a slice of strings
 
 func newDeck() deck {
 	cards := deck{}
@@ -33,7 +31,6 @@ func (d deck) print() {
 }
 
 func deal(d deck, handSize int) (deck, deck) {
-	// return start of slice to -1 handSize and everything from handsize to end
 	return d[:handSize], d[handSize:]
 }
 
@@ -47,4 +44,19 @@ func (d deck) saveToFile(filename string) error {
 
 func newDeckFromFile(filename string) deck {
 	bs, err := ioutil.ReadFile(filename)
+	if err != nil {
+		fmt.Println("Error:", err)
+		os.Exit(1)
+	}
+
+	s := strings.Split(string(bs), ",")
+	return deck(s)
+}
+
+func (d deck) shuffle() {
+	for i := range d {
+		newPosition := rand.Intn(len(d) - 1)
+
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
